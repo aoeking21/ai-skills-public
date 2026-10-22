@@ -1,0 +1,27 @@
+{
+  "name": "wechat-miniprogram-builder",
+  "version": "1.0.0",
+  "format": "agent-skill",
+  "entrypoint": "SKILL.md",
+  "license": "MIT",
+  "derived_from": "https://github.com/chenjin-cmd/wechat-miniprogram-builder",
+  "generated_at": "2026-08-02T01:42:00+08:00",
+  "files": [
+    "CHANGELOG.md",
+    "LICENSE",
+    "NOTICE.md",
+    "README.md",
+    "SKILL.md",
+    "assets/project-brief-template.md",
+    "assets/prompt-recipes.md",
+    "assets/release-checklist.md",
+    "assets/review-repair-template.md",
+    "references/00-runtime-verification.md",
+    "references/01-product-strategy.md",
+    "references/02-account-compliance.md",
+    "references/03-build-debug.md",
+    "references/04-cloud-ai-security.md",
+    "references/05-review-release.md",
+    "references/06-growth-portfolio.md"
+  ]
+}

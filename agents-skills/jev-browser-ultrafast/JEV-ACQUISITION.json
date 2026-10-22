@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "name": "jev-browser-ultrafast",
+  "source": "https://github.com/browser-use/jev-ultrafast",
+  "upstream_version": "0.1.0",
+  "commit": "1231850a0bf1a0c0341fe408ef1668dbbfdfac46",
+  "wheel_sha256": "025c3225133cb80e4aa9f452179e70bc9a11084aaa70933b8d66d7a39e358850",
+  "tracked_tree_sha256": "89d47e0c300a89954af3f9677f27f492b1ab94935b4ba33f4780fedb44f6a8ae",
+  "license": "MIT",
+  "risk_level": "L2-adaptive-high",
+  "tested_node": "macos-local",
+  "tested_platform": "macOS arm64",
+  "python_runtime": "3.14.7",
+  "dependency_lock": "uv.lock",
+  "tests": {
+    "ruff": "pass",
+    "pytest": "31/31 pass",
+    "build": "pass",
+    "browser_guard_checks": "21/21 pass, no model calls",
+    "live_canary": "pass: example.com -> IANA, 1 click, done, 4115 ms, central_jev_guarded=true, independent_outcome_verified=true"
+  },
+  "central_governance": "per-action JEV Central Gateway PreTool/PostTool on 127.0.0.1:4110",
+  "capability_lease": "initial hostname by default; explicit --allow-host required for cross-domain",
+  "stale_policy": "discard stale decision, re-observe, predict again",
+  "credential_refs": [
+    "~/.config/jev-ultrafast/credentials.env",
+    "~/.openclaw/.env"
+  ],
+  "rollback": "Disable jev-browser-ultrafast in JEV Skill Steward, remove its surface symlinks, and leave the pinned upstream checkout inert.",
+  "installed_at": "2026-09-23",
+  "decision_backend": "TypeSafe System One https://api.typesafe.ai/v1/systemone, model jev-latest",
+  "text_backend": "DeepSeek https://api.deepseek.com/v1, model deepseek-chat",
+  "completion_policy": "independent acceptance evidence checked before requesting another action; mutation thresholds unchanged"
+}

@@ -1,0 +1,33 @@
+diff --git a/src/windows/overlay/OverlayWindow.tsx b/src/windows/overlay/OverlayWindow.tsx
+index 44ba011..bf003f4 100644
+--- a/src/windows/overlay/OverlayWindow.tsx
++++ b/src/windows/overlay/OverlayWindow.tsx
+@@ -151,6 +151,10 @@ export function OverlayWindow() {
+     : buildSubtitleBlocks(session.subtitles.history, settings.subtitleDisplayMode, primaryTail)
+       .map(block => ({ ...block, audioSource: undefined })),
+   [dual, session.subtitles.history, settings.subtitleDisplayMode, primarySubtitles.history, primaryTail, microphoneSubtitles.history, microphoneTail]);
++  // Optional single-sentence presentation for dedicated builds. The canonical
++  // history remains unchanged; scrolling up still opens the full timeline.
++  const singleSentenceMode = import.meta.env.VITE_MIMI_SINGLE_SENTENCE === "1";
++  const visibleBlocks = singleSentenceMode && !readingHistory ? blocks.slice(-1) : blocks;
+   const hasContent = hasSubtitleContent(session.subtitles);
+   const phaseLabel = session.status.kind === "stopping" ? I18N.overlay.stopping : OVERLAY_ACTIVITY_PHASES[phase].accessibilityLabel;
+   const pauseLabel = session.isPaused
+@@ -281,7 +285,7 @@ export function OverlayWindow() {
+           >
+             {blocks.length > 0 && (
+               <Timeline
+-                blocks={blocks}
++                blocks={visibleBlocks}
+                 fontSize={settings.fontSize}
+                 color={settings.subtitleColor}
+                 alignment={settings.subtitleAlignment}
+@@ -465,7 +469,7 @@ export function OverlayWindow() {
+             </div>
+           ) : (
+             <Timeline
+-              blocks={blocks}
++              blocks={visibleBlocks}
+               fontSize={settings.fontSize}
+               color={settings.subtitleColor}
+               alignment={settings.subtitleAlignment}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "adapter": "gpt-image-2",
+  "cases": [
+    {
+      "id": "reference-identity-edit",
+      "input": "使用上传的成年人物照片生成 9:16 长沙强风街头抓拍，并给出 GPT Image 2 API 参数。",
+      "mustCover": [
+        "images.edit",
+        "gpt-image-2",
+        "identity anchor",
+        "1152x2048",
+        "quality high",
+        "单一摄影事件",
+        "人物身份真值"
+      ],
+      "mustAvoid": [
+        "input_fidelity",
+        "transparent",
+        "模板脸",
+        "持续镜头交流"
+      ]
+    },
+    {
+      "id": "text-only-generate",
+      "input": "没有参考图，为一个虚构成年女性写 3:4 GPT Image 2 写真提示词和生成参数。",
+      "mustCover": [
+        "images.generate",
+        "gpt-image-2",
+        "1152x1536",
+        "n 1",
+        "不宣称锁定具体真人"
+      ],
+      "mustAvoid": [
+        "images.edit",
+        "虚构参考图",
+        "透明背景"
+      ]
+    },
+    {
+      "id": "five-independent-images",
+      "input": "用 GPT Image 2 生成五张同系列独立人像，每张动作、构图和事件不同。",
+      "mustCover": [
+        "五条独立提示词",
+        "五次独立调用",
+        "每次 n 1",
+        "独立摄影事件",
+        "单张画布"
+      ],
+      "mustAvoid": [
+        "五宫格",
+        "一个请求合并五条提示词",
+        "仅替换动作词"
+      ]
+    },
+    {
+      "id": "invalid-edit-parameters",
+      "input": "为 GPT Image 2 参考图编辑设置 input_fidelity high 和透明背景。",
+      "mustCover": [
+        "删除 input_fidelity",
+        "默认高保真输入",
+        "background auto 或 opaque"
+      ],
+      "mustAvoid": [
+        "input_fidelity high",
+        "background transparent"
+      ]
+    },
+    {
+      "id": "size-validation",
+      "input": "输出 1080x1920 的 GPT Image 2 竖图参数。",
+      "mustCover": [
+        "尺寸必须为 16 的倍数",
+        "转换为有效 9:16 尺寸",
+        "1152x2048"
+      ],
+      "mustAvoid": [
+        "直接提交 1080x1920",
+        "超过 3:1"
+      ]
+    },
+    {
+      "id": "native-4k-portrait",
+      "input": "把授权人物参考图做成 GPT Image 2 的 4K 9:16 最终竖图。",
+      "mustCover": [
+        "2160x3840",
+        "images.edit",
+        "high",
+        "png",
+        "preserve"
+      ],
+      "mustAvoid": [
+        "实验性 4K",
+        "4096"
+      ]
+    },
+    {
+      "id": "requested-4096-long-edge",
+      "input": "对上传原片做无损修复，最终长边必须 4096。",
+      "mustCover": [
+        "GPT Image 2 最大边 3840",
+        "先生成最大合规尺寸",
+        "独立超分",
+        "preserve-source"
+      ],
+      "mustAvoid": [
+        "4096 是 GPT Image 2 原生合法尺寸",
+        "为了 4K 重构人物"
+      ]
+    },
+    {
+      "id": "user-error-retry",
+      "input": "图片 API 返回 image_generation_user_error，自动原样重试十次。",
+      "mustCover": [
+        "修改 Prompt、尺寸或输入图",
+        "不能原样自动重试"
+      ],
+      "mustAvoid": [
+        "原样重试",
+        "无限重试"
+      ]
+    }
+  ]
+}

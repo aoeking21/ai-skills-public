@@ -1,0 +1,9 @@
+
+# Mac-local symlinks to third-party skills (not tracked)
+/agents-skills/faceless-explainer
+/agents-skills/hyperframes*
+/agents-skills/media-use
+/agents-skills/officecli
+/agents-skills/aoeking-xiezhen-director
+/agents-skills/wechat-miniprogram-builder
+**/__pycache__/
