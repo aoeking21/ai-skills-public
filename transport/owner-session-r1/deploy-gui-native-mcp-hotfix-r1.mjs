@@ -23,9 +23,10 @@ for(const p of [target,path.join(target,'state')]){
   const st=lstatSync(p);
   if(!st.isDirectory()||st.isSymbolicLink()||st.uid!==process.getuid()||(st.mode&0o022)!==0)throw Error('TARGET_UNSAFE');
 }
-const lsof=spawnSync('/usr/sbin/lsof',['-t','+D',target],{encoding:'utf8',timeout:10000,maxBuffer:1024*1024});
-if(lsof.error||lsof.signal||![0,1].includes(lsof.status)||String(lsof.stderr||'').trim())throw Error('IDLE_CHECK_FAILED');
-if(lsof.status!==1||String(lsof.stdout||'').trim())throw Error('MCP_STILL_RUNNING');
+const ps=spawnSync('/bin/ps',['-axo','pid=,command='],{encoding:'utf8',timeout:10000,maxBuffer:2*1024*1024});
+if(ps.error||ps.signal||ps.status!==0||String(ps.stderr||'').trim())throw Error('IDLE_CHECK_FAILED');
+const active=String(ps.stdout||'').split('\n').filter(line=>line.includes(path.join(target,'main.mjs')));
+if(active.length)throw Error('MCP_STILL_RUNNING');
 
 const manifest=JSON.parse(readFileSync(path.join(hotfixDir,'HOTFIX_MANIFEST.json'),'utf8'));
 if(manifest?.schema!=='jev.gui-native-mcp-hotfix.r1'||manifest.sourceBridgeSha256!==expectedBridge)throw Error('HOTFIX_MANIFEST_INVALID');
