@@ -126,6 +126,13 @@ async function jevReview(args, draft) {
     ? r.structuredContent
     : JSON.parse(r.content.find((x)=>x.type==='text').text);
   const rec = obj?.recommendation;
+  console.log('JEV_SELECTED=' + String(rec?.selected ?? 'UNKNOWN'));
+  console.log('JEV_CONFIDENCE=' + String(rec?.confidence ?? 'UNKNOWN'));
+  console.log('JEV_APPROVE_CHECKS=' + JSON.stringify(
+    Array.isArray(obj?.checks)
+      ? obj.checks.filter((x)=>x?.candidate==='approve').map((x)=>({requirement:x.requirement,answer:x.answer}))
+      : []
+  ));
   if (obj?.provider!=='typesafe' || rec?.selected!=='approve' || rec?.escaped!==false
       || typeof rec?.confidence!=='number' || rec.confidence<0.70) {
     throw new Error('JEV_NOT_APPROVED');
