@@ -6,13 +6,13 @@
   "description": "One-owner-auth bounded EnConvo + Grok Bot setup: Grok Build OAuth handoff, Grok Bot webhook routine creation/update, EnConvo Grok Bot Routine credential backfill, independent pre/post snapshots, exact TypeSafe review, replay protection, and fail-closed recovery.",
   "target": {
     "apps": ["EnConvo", "Grok Bot"],
-    "routine_name": "EnConvo",
+    "routine_name": "Grok Bot Routine",
     "credential_provider": "Grok Bot Routine"
   },
-  "allowed_tools": ["desktop_status", "desktop_snapshot", "desktop_click", "desktop_type", "desktop_launch", "file_read", "file_backup", "oauth_status"],
+  "allowed_tools": ["desktop_status", "desktop_snapshot", "desktop_click", "desktop_type", "desktop_launch", "file_read", "file_backup", "oauth_status", "clipboard_read", "clipboard_clear"],
   "allowed_apps": ["EnConvo", "Grok Bot"],
   "allowed_paths": ["/Users/Tigger_1/Library/Application Support/Enconvo", "/Users/Tigger_1/Library/Application Support/com.frostyeve.enconvo", "/Users/Tigger_1/Library/Application Support/Grok Bot", "/Users/Tigger_1/JEV-Workspace/G6-TaskOps", "/Users/Tigger_1/JEV-Workspace/Staging"],
-  "allowed_operations": ["status", "oauth.signin", "oauth.status", "routine.detect", "routine.create", "routine.update", "routine.test", "credentials.backfill", "config.backup", "recover.safe"],
+  "allowed_operations": ["status", "oauth.signin", "oauth.status", "routine.detect", "routine.create", "routine.update", "routine.test", "credentials.backfill", "clipboard.read", "clipboard.clear", "config.backup", "recover.safe"],
   "evidence_required": true,
   "rollback_required": true,
   "owner_auth": {
