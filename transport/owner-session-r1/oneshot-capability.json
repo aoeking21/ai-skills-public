@@ -1,0 +1,34 @@
+{
+  "schema": "jev.g6.taskops.capability.v1",
+  "id": "CAP_ENCONVO_GROK_R2_ONESHOT",
+  "version": 2,
+  "risk_level": "L3_GUI_WRITE",
+  "description": "One-owner-auth bounded EnConvo + Grok Bot setup: Grok Build OAuth handoff, Grok Bot webhook routine creation/update, EnConvo Grok Bot Routine credential backfill, independent pre/post snapshots, exact TypeSafe review, replay protection, and fail-closed recovery.",
+  "target": {
+    "apps": ["EnConvo", "Grok Bot"],
+    "routine_name": "EnConvo",
+    "credential_provider": "Grok Bot Routine"
+  },
+  "allowed_tools": ["desktop_status", "desktop_snapshot", "desktop_click", "desktop_type", "desktop_launch", "file_read", "file_backup", "oauth_status"],
+  "allowed_apps": ["EnConvo", "Grok Bot"],
+  "allowed_paths": ["/Users/Tigger_1/Library/Application Support/Enconvo", "/Users/Tigger_1/Library/Application Support/com.frostyeve.enconvo", "/Users/Tigger_1/Library/Application Support/Grok Bot", "/Users/Tigger_1/JEV-Workspace/G6-TaskOps", "/Users/Tigger_1/JEV-Workspace/Staging"],
+  "allowed_operations": ["status", "oauth.signin", "oauth.status", "routine.detect", "routine.create", "routine.update", "routine.test", "credentials.backfill", "config.backup", "recover.safe"],
+  "evidence_required": true,
+  "rollback_required": true,
+  "owner_auth": {
+    "required": true,
+    "provider": "JEV_G6_OWNER_AUTH",
+    "once_per_task": true,
+    "max_gui_owner_session_seconds": 1200,
+    "max_operations": 24
+  },
+  "replay_protection": {"mode": "ONE_SHOT_OPERATION_ID", "deny_duplicates": true},
+  "oauth_identity_confirmation": "HUMAN_REQUIRED",
+  "credential_policy": "RAW_CREDENTIALS_NEVER_OUTPUT",
+  "gui_verification": "INDEPENDENT_PRE_AND_POST_SNAPSHOT",
+  "secure_enclave_private_key_exportable": false,
+  "authorization_scope": "ONE_OWNER_AUTH_PER_BOUNDED_TASK_PERMIT",
+  "permanent_authorization": false,
+  "g6_core_policy": "FROZEN_REFERENCE_ONLY",
+  "status": "ONESHOT_TASK_SCOPED"
+}
