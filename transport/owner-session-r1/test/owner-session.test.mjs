@@ -252,3 +252,16 @@ test('M: non-mutation GUI tools are rejected by the state layer', async () => {
   );
   await state.close();
 });
+
+
+test('N: bounded helper permits six exact mutations and rejects the seventh', async () => {
+  const {client} = await fixture();
+  const state = new OwnerSessionState({client});
+  await state.open(permit({maxOperations: 6}));
+  for (let index = 0; index < 6; index += 1) {
+    await state.authorize(action(index), 'challenge');
+    await state.authorize(action(index), 'execution');
+  }
+  await assert.rejects(state.authorize(action(6), 'challenge'), /MAX_OPERATIONS_EXCEEDED/);
+  await state.close();
+});
