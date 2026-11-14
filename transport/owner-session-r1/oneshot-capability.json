@@ -20,7 +20,7 @@
     "provider": "JEV_G6_OWNER_AUTH",
     "once_per_task": true,
     "max_gui_owner_session_seconds": 1200,
-    "max_operations": 24
+    "max_operations": 32
   },
   "replay_protection": {"mode": "ONE_SHOT_OPERATION_ID", "deny_duplicates": true},
   "oauth_identity_confirmation": "HUMAN_REQUIRED",
