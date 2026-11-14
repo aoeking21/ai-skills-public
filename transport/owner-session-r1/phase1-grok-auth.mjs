@@ -253,7 +253,7 @@ function findControl(tree, patterns, label) {
   const entries = walk(tree);
   for (const pattern of patterns) {
     const matcher = typeof pattern === 'string'
-      ? (s)=>s.trim().toLowerCase() === pattern.toLowerCase()
+      ? (s)=>s.split(' | ').some((part)=>part.trim().toLowerCase() === pattern.toLowerCase())
       : (s)=>pattern.test(s);
     const direct = entries.find(({node})=>visible(node) && clickable(node) && matcher(textOf(node)));
     if (direct) return direct.node;
