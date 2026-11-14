@@ -364,7 +364,15 @@ async function clickControl(control, label) {
     arguments:{...args,guiOwnerGrant,productionReview},
   }));
   if (second.ok !== true || second.code !== 'EXECUTED') {
-    throw new Error('CLICK_EXECUTION_FAILED_'+label+'_'+String(second.code));
+    const nativeCode = String(
+      second?.native?.error?.code ??
+      second?.native?.code ??
+      second?.native?.native?.error?.code ??
+      second?.native?.native?.code ??
+      'UNKNOWN'
+    ).slice(0,120);
+    console.log('CLICK_NATIVE_FAILURE label='+label+' outer='+String(second.code)+' native='+nativeCode);
+    throw new Error('CLICK_EXECUTION_FAILED_'+label+'_'+String(second.code)+'_NATIVE_'+nativeCode);
   }
   mutationCount += 1;
   console.log('CLICK '+String(mutationCount)+' '+label+'=PASS');
