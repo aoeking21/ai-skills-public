@@ -163,8 +163,10 @@ async function typeSafeReview(toolName, args, draft, label) {
       name:'jev_decide',
       arguments:{
         decision:'Should this exact '+toolName+' action for EnConvo proceed under the sealed G6 policy?',
-        evidence:'Exact action: tool='+toolName+'; app=EnConvo; taskId='+taskId+'; actionDigest='+draft.actionDigest+'; target='+draft.target+'; operationClass=gui; environment=PRODUCTION; purpose='+label+'.',
-        priorities:'Preserve Frozen G6 Core. Fail closed on ambiguity. Approve only the exact bound action. No credential text is supplied. No unrelated mutation.',
+        evidence:isSnapshot
+          ? 'Exact read-only action: tool=desktop_snapshot; app=EnConvo; taskId='+taskId+'; actionDigest='+draft.actionDigest+'; target='+draft.target+'; environment=PRODUCTION; purpose='+label+'. No mutation payload, text input, credentials, file write, shell, launch, or unrelated action is supplied.'
+          : 'Exact action purpose: click the visible EnConvo control named '+label+'. The action is one desktop_click only. The ref comes from the immediately preceding verified EnConvo snapshot. It is bound to snapshotDigest, target='+draft.target+', and actionDigest='+draft.actionDigest+'. No text input, credentials, file writes, shell execution, launch action, network action, or unrelated mutation is included. A fresh verified snapshot is required immediately after execution. Any mismatch or delivery uncertainty fails closed.',
+        priorities:'Preserve Frozen G6 Core. Approve only the exact scoped action. Fail closed on ambiguity. No credential handling.',
         candidates:[
           {id:'approve',description:'Approve only this exact scoped '+toolName+' action.'},
           {id:'deny',description:'Deny this action.'},
@@ -174,9 +176,9 @@ async function typeSafeReview(toolName, args, draft, label) {
           'The requested tool is desktop_snapshot and is read-only.',
           'The supplied snapshot arguments contain only app, taskId, and interactive=false; no text, ref, click, type, launch, credential, or mutation payload is supplied.',
         ] : [
-          'The action is limited to the exact supplied EnConvo target and action digest.',
-          'The requested tool is desktop_click and is limited to the single supplied ref from the immediately preceding verified EnConvo snapshot.',
-          'The canonical click arguments contain app, taskId, ref, and snapshotDigest only; no text or credential payload is supplied.',
+          'The action is limited to one exact desktop_click in EnConvo.',
+          'The click target is the visible '+label+' control from the immediately preceding verified snapshot and is bound to that snapshot digest.',
+          'No text, credential, shell, file-write, launch, network, or unrelated mutation payload is present; a fresh verified snapshot is required immediately after execution.',
         ],
         escape_hatches:false,
         escalate_on_contradiction:true,
@@ -192,7 +194,7 @@ async function typeSafeReview(toolName, args, draft, label) {
   const approveChecks = Array.isArray(obj?.checks)
     ? obj.checks.filter((x)=>x?.candidate === 'approve')
     : [];
-  console.log('REVIEW '+toolName+' '+label+' selected='+String(rec?.selected)+' confidence='+String(rec?.confidence)+' checks='+approveChecks.map((x)=>x.answer).join(','));
+  console.log('REVIEW '+toolName+' '+label+' selected='+String(rec?.selected)+' confidence='+String(rec?.confidence)+' approve_prob='+String(rec?.probabilities?.approve)+' checks='+approveChecks.map((x)=>x.answer).join(','));
   if (obj?.provider !== 'typesafe'
     || rec?.selected !== 'approve'
     || rec?.escaped !== false
