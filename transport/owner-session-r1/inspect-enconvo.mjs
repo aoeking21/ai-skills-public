@@ -15,7 +15,7 @@ const nodeBin = '/opt/homebrew/opt/node@22/bin/node';
 const guiMain = path.join(home, '.local/share/jev-gui-permit-mcp/main.mjs');
 const signHelper = path.join(home, 'JEV-Workspace/Staging/webchat-direct-control-r1/sign-exact-review.mjs');
 const jevMcp = path.join(home, '.local/bin/jev-mcp');
-const work = mkdtempSync(path.join(tmpdir(), 'jev-enconvo-inspect-'));
+const work = mkdtempSync(path.join(home, 'JEV-Workspace/Staging/jev-enconvo-inspect-'));
 const reviewOut = path.join(work, 'snapshot.production-review.json');
 const snapshotOut = path.join(work, 'snapshot.json');
 
