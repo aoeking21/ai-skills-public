@@ -113,7 +113,7 @@ async function jevReview(args, draft) {
         requirements:[
           'The action is limited to the exact supplied EnConvo target and action digest.',
           'The action is read-only and does not mutate application or system state.',
-          'The action does not require reading or outputting raw credentials.',
+          'The requested tool is desktop_snapshot and the supplied arguments contain only app, taskId, and interactive=false; no text, ref, click, type, launch, credential, or mutation payload is supplied.',
         ],
         escape_hatches:false,
         escalate_on_contradiction:true,
