@@ -1,0 +1,8 @@
+{
+  "name": "owner-session-r1-transport",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/owner-session.test.mjs"
+  }
+}
