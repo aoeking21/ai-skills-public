@@ -6,9 +6,9 @@ import {
   validateCapabilityManifestPin,
 } from './owner-session-client.mjs';
 
-const [issuerPath, capabilityManifestPath] = process.argv.slice(2);
-if (!issuerPath || !capabilityManifestPath) {
-  console.error('USAGE: node live-smoke.mjs <issuerPath> <capabilityManifestPath>');
+const [issuerPath, capabilityManifestPath, issuerDirectory] = process.argv.slice(2);
+if (!issuerPath || !capabilityManifestPath || !issuerDirectory) {
+  console.error('USAGE: node live-smoke.mjs <issuerPath> <capabilityManifestPath> <issuerDirectory>');
   process.exit(2);
 }
 
@@ -57,6 +57,8 @@ const permit = {
 const client = new OwnerSessionClient({
   issuerPath,
   capabilityManifestPath,
+  command: issuerPath,
+  args: ['--issuer-dir', issuerDirectory],
   requestTimeoutMs: 120_000,
   maxOutputBytes: 65_536,
 });
