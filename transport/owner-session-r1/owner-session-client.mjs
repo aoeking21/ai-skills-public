@@ -5,7 +5,7 @@ import {readFile} from 'node:fs/promises';
 export const ISSUER_SHA256 = '3c7bbc59ac399b809fd46d2a29aad34ab57bfb1105a850effd6e2fc3d8c927a8';
 export const CAPABILITY_SHA256 = '229e947495f44eb6652fce39dd14f074202f154bbe7d929b3c892ee6ec007122';
 export const MAX_SESSION_MS = 300_000;
-export const MAX_OPERATIONS = 4;
+export const MAX_OPERATIONS = 6;
 
 const H32 = /^[a-f0-9]{32}$/;
 const H64 = /^[a-f0-9]{64}$/;
