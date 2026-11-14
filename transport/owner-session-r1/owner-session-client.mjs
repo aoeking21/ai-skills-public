@@ -2,7 +2,7 @@ import {spawn} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 
-export const ISSUER_SHA256 = '3c7bbc59ac399b809fd46d2a29aad34ab57bfb1105a850effd6e2fc3d8c927a8';
+export const ISSUER_SHA256 = '5fd8a579aa8292076e50d651d9bc540cb2feebabf63c9e3900b3ca5e822997de';
 export const CAPABILITY_SHA256 = '229e947495f44eb6652fce39dd14f074202f154bbe7d929b3c892ee6ec007122';
 export const MAX_SESSION_MS = 300_000;
 export const MAX_OPERATIONS = 6;
