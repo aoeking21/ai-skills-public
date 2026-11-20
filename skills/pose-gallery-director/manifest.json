@@ -1,0 +1,18 @@
+{
+  "derivedFrom": "anhao/ai-pose-gallery-zh (Chinese mirror of Gia @giaaibusi ai-pose-gallery)",
+  "displayName": "姿势图库导演",
+  "files": [
+    "SKILL.md",
+    "README.md",
+    "scripts/pose_search.py",
+    "references/pose-fusion-contract.md",
+    "references/pose-catalog-source.md",
+    "evals/trigger_cases.json"
+  ],
+  "installCommand": "npx skills add aoeking21/ai-skills-public --skill pose-gallery-director -g -a codex -y",
+  "license": "MIT",
+  "name": "pose-gallery-director",
+  "schemaVersion": 1,
+  "source": "https://github.com/aoeking21/ai-skills-public/tree/main/skills/pose-gallery-director",
+  "version": "1.0.0"
+}
