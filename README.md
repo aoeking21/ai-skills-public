@@ -85,6 +85,20 @@ Original content is MIT-licensed; vendored third-party skills keep their upstrea
 
 <!-- callable-agent-skill:end -->
 
+<!-- pose-gallery-director:start -->
+
+### pose-gallery-director（可安装 Agent Skill）
+
+姿势图库导演 Skill。按中文关键词检索姿势、服装、人像参考图，并把选中的姿势接进写真摄影工作流：身份锁定之后、构图之前。图库图片不随本仓库分发，按需单张拉取；默认只出安全姿势。
+
+- [标准 Skill 入口](skills/pose-gallery-director/SKILL.md)
+- [安装与调用说明](skills/pose-gallery-director/README.md)
+- [融合设计](docs/photography-pose-fusion-v1.0.md)
+- Codex 全局安装：`npx skills add aoeking21/ai-skills-public --skill pose-gallery-director -g -a codex -y`
+- 图库来源：日本原版 Gia（@giaaibusi）ai-pose-gallery，中文镜像 [anhao/ai-pose-gallery-zh](https://github.com/anhao/ai-pose-gallery-zh)
+
+<!-- pose-gallery-director:end -->
+
 ## 应用开发
 
 <!-- wechat-miniprogram-builder:start -->
@@ -112,6 +126,7 @@ ai-skills/
 ├── agents-skills/        # Mac ~/.agents/skills 个人技能
 ├── skills/
 │   ├── aoeking-xiezhen-director/
+│   ├── pose-gallery-director/
 │   └── wechat-miniprogram-builder/
 ├── prompt-engineering/
 └── docs/

@@ -1,0 +1,1 @@
+{"cases":[{"expected":"返回标准系坐姿候选，含姿势编号、名称、角度，不含性感系与双人系","input":"坐姿","kind":"pose"},{"expected":"返回同一姿势编号的五个角度记录","input":"后仰坐","kind":"pose"},{"expected":"返回服装候选，含分类与标签","input":"连衣裙","kind":"costume"},{"expected":"返回人像候选，含发长与发型","input":"短发","kind":"portrait"},{"expected":"默认不返回性感系与双人系记录","input":"性感","kind":"pose"}]}
